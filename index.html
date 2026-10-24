@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Smart CRM Predictor | Broker Registration</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Inter', sans-serif; overflow-x: hidden; }
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #050505; }
+        ::-webkit-scrollbar-thumb { background: #333; border-radius: 4px; }
+        
+        /* Custom animation delays */
+        .delay-100 { animation-delay: 100ms; }
+        .delay-200 { animation-delay: 200ms; }
+        .delay-300 { animation-delay: 300ms; }
+        
+        /* Input autofill fix for dark mode */
+        input:-webkit-autofill,
+        input:-webkit-autofill:focus {
+            transition: background-color 600000s 0s, color 600000s 0s;
+        }
+    </style>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: { 400: '#60a5fa', 500: '#3b82f6', 600: '#2563eb' },
+                        dark: { bg: '#050505', card: 'rgba(17, 17, 17, 0.7)', border: '#2a2a2a' }
+                    },
+                    animation: {
+                        'fade-in-up': 'fadeInUp 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards',
+                        'blob': 'blob 7s infinite',
+                    },
+                    keyframes: {
+                        fadeInUp: {
+                            '0%': { opacity: '0', transform: 'translateY(20px)' },
+                            '100%': { opacity: '1', transform: 'translateY(0)' },
+                        },
+                        blob: {
+                            '0%': { transform: 'translate(0px, 0px) scale(1)' },
+                            '33%': { transform: 'translate(30px, -50px) scale(1.1)' },
+                            '66%': { transform: 'translate(-20px, 20px) scale(0.9)' },
+                            '100%': { transform: 'translate(0px, 0px) scale(1)' },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-dark-bg text-gray-200 min-h-screen flex items-center justify-center p-4 relative overflow-hidden">
+
+    <!-- Ambient Background Effects -->
+    <div class="absolute top-0 -left-4 w-72 h-72 bg-brand-600 rounded-full mix-blend-screen filter blur-[120px] opacity-30 animate-blob pointer-events-none"></div>
+    <div class="absolute top-0 -right-4 w-72 h-72 bg-indigo-600 rounded-full mix-blend-screen filter blur-[120px] opacity-30 animate-blob animation-delay-2000 pointer-events-none"></div>
+    <div class="absolute -bottom-8 left-20 w-72 h-72 bg-purple-600 rounded-full mix-blend-screen filter blur-[120px] opacity-30 animate-blob animation-delay-4000 pointer-events-none"></div>
+
+    <!-- Main Card (Glassmorphism) -->
+    <div class="w-full max-w-md bg-dark-card backdrop-blur-xl border border-dark-border rounded-2xl shadow-2xl p-8 relative z-10 opacity-0 animate-fade-in-up" id="formContainer">
+        <!-- Glowing Top Border -->
+        <div class="absolute top-0 left-0 w-full h-[2px] bg-gradient-to-r from-transparent via-brand-500 to-transparent opacity-80"></div>
+
+        <div class="text-center mb-8 opacity-0 animate-fade-in-up delay-100">
+            <h2 class="text-2xl font-bold text-white mb-2 tracking-tight">Smart CRM Predictor</h2>
+            <p class="text-sm text-gray-400">Register your agency to activate 24/7 AI lead scoring and automated VIP alerts.</p>
+        </div>
+
+        <form id="brokerForm" class="space-y-5">
+            <div class="opacity-0 animate-fade-in-up delay-100">
+                <label for="brokerName" class="block text-sm font-medium text-gray-300 mb-1.5 transition-colors group-focus-within:text-brand-400">Full Name</label>
+                <input type="text" id="brokerName" placeholder="e.g. John Doe" required class="w-full bg-black/50 border border-dark-border rounded-lg px-4 py-3 text-gray-200 placeholder-gray-600 focus:outline-none focus:ring-1 focus:ring-brand-500 focus:border-brand-500 transition-all shadow-inner">
+            </div>
+
+            <div class="opacity-0 animate-fade-in-up delay-200">
+                <label for="agencyName" class="block text-sm font-medium text-gray-300 mb-1.5 transition-colors group-focus-within:text-brand-400">Real Estate Agency</label>
+                <input type="text" id="agencyName" placeholder="e.g. Prime Properties" required class="w-full bg-black/50 border border-dark-border rounded-lg px-4 py-3 text-gray-200 placeholder-gray-600 focus:outline-none focus:ring-1 focus:ring-brand-500 focus:border-brand-500 transition-all shadow-inner">
+            </div>
+
+            <div class="opacity-0 animate-fade-in-up delay-300">
+                <label for="email" class="block text-sm font-medium text-gray-300 mb-1.5 transition-colors group-focus-within:text-brand-400">Work Email (Gmail preferred)</label>
+                <input type="email" id="email" placeholder="broker@agency.com" required class="w-full bg-black/50 border border-dark-border rounded-lg px-4 py-3 text-gray-200 placeholder-gray-600 focus:outline-none focus:ring-1 focus:ring-brand-500 focus:border-brand-500 transition-all shadow-inner">
+            </div>
+
+            <button type="submit" id="submitBtn" class="opacity-0 animate-fade-in-up delay-300 w-full mt-8 bg-brand-600 hover:bg-brand-500 text-white font-semibold py-3.5 px-4 rounded-lg transition-all duration-300 flex justify-center items-center shadow-[0_0_20px_rgba(37,99,235,0.4)] hover:shadow-[0_0_30px_rgba(59,130,246,0.6)] transform hover:-translate-y-0.5">
+                <span>Start Free Trial</span>
+                <svg id="loadingSpinner" class="hidden animate-spin ml-2 h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                    <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                    <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                </svg>
+            </button>
+        </form>
+
+        <div id="successState" class="hidden flex-col items-center justify-center text-center py-8 opacity-0 animate-fade-in-up">
+            <div class="w-16 h-16 bg-brand-500/20 text-brand-500 rounded-full flex items-center justify-center mb-5 shadow-[0_0_30px_rgba(59,130,246,0.3)]">
+                <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"></path></svg>
+            </div>
+            <h3 class="text-xl font-bold text-white mb-2">Registration Successful</h3>
+            <p class="text-gray-400 text-sm leading-relaxed">Welcome aboard! Check your inbox for the 60-second setup instructions to connect your incoming leads to the AI.</p>
+        </div>
+    </div>
+
+    <!-- Floating Feedback Button -->
+    <button onclick="toggleFeedbackModal(true)" class="fixed bottom-6 right-6 bg-dark-card backdrop-blur-md border border-dark-border shadow-2xl hover:border-brand-500 text-gray-400 hover:text-brand-400 rounded-full py-3 px-5 flex items-center space-x-2 transition-all duration-300 hover:-translate-y-1 z-40">
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z"></path></svg>
+        <span class="font-medium text-sm">Feedback</span>
+    </button>
+
+    <!-- Feedback Modal -->
+    <div id="feedbackModal" class="hidden fixed inset-0 bg-black/60 backdrop-blur-md z-50 flex items-center justify-center p-4 transition-opacity">
+        <div class="bg-dark-card border border-dark-border rounded-xl w-full max-w-sm shadow-[0_0_50px_rgba(0,0,0,0.5)] overflow-hidden relative transform scale-95 transition-transform" id="feedbackContent">
+            <div class="p-6 relative z-10">
+                <div class="flex justify-between items-center mb-5">
+                    <h3 class="text-lg font-bold text-white">Help us improve</h3>
+                    <button onclick="toggleFeedbackModal(false)" class="text-gray-500 hover:text-white transition-colors bg-black/50 hover:bg-black/80 rounded-full p-1.5">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M6 18L18 6M6 6l12 12"></path></svg>
+                    </button>
+                </div>
+                <textarea id="feedbackText" rows="4" placeholder="What features would you like to see next?" class="w-full bg-black/50 border border-dark-border rounded-lg p-3 text-gray-200 placeholder-gray-600 text-sm focus:outline-none focus:ring-1 focus:ring-brand-500 focus:border-brand-500 resize-none mb-4 shadow-inner"></textarea>
+                <button onclick="submitFeedback()" class="w-full bg-gray-800 hover:bg-gray-700 text-white font-medium py-3 rounded-lg transition-colors shadow-lg">Send Feedback</button>
+            </div>
+            
+            <!-- Feedback Success Overlay -->
+            <div id="feedbackSuccess" class="hidden absolute inset-0 bg-dark-card/95 backdrop-blur flex flex-col items-center justify-center p-6 text-center z-20">
+                <div class="text-brand-500 mb-3">
+                    <svg class="w-12 h-12 mx-auto drop-shadow-[0_0_10px_rgba(59,130,246,0.5)]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 10h4.764a2 2 0 011.789 2.894l-3.5 7A2 2 0 0115.263 21h-4.017c-.163 0-.326-.02-.485-.06L7 20m7-10V5a2 2 0 00-2-2h-.095c-.5 0-.905.405-.905.905 0 .714-.211 1.412-.608 2.006L7 11v9m7-10h-2M7 20H5a2 2 0 01-2-2v-6a2 2 0 012-2h2.5"></path></svg>
+                </div>
+                <h4 class="text-white font-bold text-lg mb-1">Thanks for the input!</h4>
+                <p class="text-gray-400 text-sm">We review all feedback to improve our CRM.</p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const MAKE_WEBHOOK_URL = "https://hook.eu1.make.com/jeqwwfjrutfo5wmet7zkfg8fhysl89qw";
+
+        const form = document.getElementById('brokerForm');
+        const submitBtn = document.getElementById('submitBtn');
+        const btnText = submitBtn.querySelector('span');
+        const spinner = document.getElementById('loadingSpinner');
+        const successState = document.getElementById('successState');
+
+        form.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            
+            const payload = {
+                broker_name: document.getElementById('brokerName').value,
+                agency_name: document.getElementById('agencyName').value,
+                email: document.getElementById('email').value,
+                signup_date: new Date().toISOString()
+            };
+
+            btnText.textContent = 'Registering...';
+            spinner.classList.remove('hidden');
+            submitBtn.disabled = true;
+            submitBtn.classList.add('opacity-75', 'cursor-not-allowed');
+
+            try {
+                // Uncomment to enable live Make.com webhook:
+                const response = await fetch(MAKE_WEBHOOK_URL, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(payload)
+                });
+                if (!response.ok) throw new Error('Network response was not ok');
+
+                await new Promise(resolve => setTimeout(resolve, 1200));
+                
+                form.classList.add('hidden');
+                successState.classList.remove('hidden');
+
+            } catch (error) {
+                console.error('Error submitting form:', error);
+                btnText.textContent = 'Error. Try Again';
+                submitBtn.classList.add('bg-red-500', 'shadow-[0_0_20px_rgba(239,68,68,0.4)]');
+                submitBtn.classList.remove('bg-brand-600', 'hover:bg-brand-500');
+            } finally {
+                spinner.classList.add('hidden');
+                submitBtn.disabled = false;
+                submitBtn.classList.remove('opacity-75', 'cursor-not-allowed');
+            }
+        });
+
+        const feedbackModal = document.getElementById('feedbackModal');
+        const feedbackContent = document.getElementById('feedbackContent');
+        const feedbackSuccess = document.getElementById('feedbackSuccess');
+        const feedbackText = document.getElementById('feedbackText');
+
+        function toggleFeedbackModal(show) {
+            if (show) {
+                feedbackModal.classList.remove('hidden');
+                setTimeout(() => {
+                    feedbackModal.classList.remove('opacity-0');
+                    feedbackContent.classList.remove('scale-95');
+                    feedbackContent.classList.add('scale-100');
+                }, 10);
+                feedbackText.value = '';
+                feedbackSuccess.classList.add('hidden');
+            } else {
+                feedbackModal.classList.add('opacity-0');
+                feedbackContent.classList.remove('scale-100');
+                feedbackContent.classList.add('scale-95');
+                setTimeout(() => feedbackModal.classList.add('hidden'), 300);
+            }
+        }
+
+        function submitFeedback() {
+            const text = feedbackText.value.trim();
+            if (!text) return;
+            feedbackSuccess.classList.remove('hidden');
+            setTimeout(() => toggleFeedbackModal(false), 2000);
+        }
+
+        feedbackModal.addEventListener('click', (e) => {
+            if (e.target === feedbackModal) toggleFeedbackModal(false);
+        });
+    </script>
+</body>
+</html>
